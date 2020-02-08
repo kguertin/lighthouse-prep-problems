@@ -3,20 +3,44 @@ let camelCase = string => {
   for (let i = 0; i < string.length; i++){
     if (string[i] === ' '){
       camelString = string.replace(' ' + string[i + 1], `${string[i+ 1]}`.toUpperCase());
+      x = camelString[0].toLowerCase()
+      camelString = x + camelString.slice(1, camelString.length)
       string = camelString;
     }
   }
     return camelString;
 }
 
-console.log(camelCase('Hello sweet World'))
+let pascalCase = string => {
+  let pascalString = string;
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === ' '){
+      pascalString = string.replace(' ' + string[i + 1], `${string[i + 1]}`.toUpperCase());
+      x = pascalString[0].toUpperCase();
+      pascalString =  x + pascalString.slice(1, pascalString.length);
+      string = pascalString;
+    }
+  }
+  return pascalString;
+}
+
+
+let snakeStyle = string => {
+  let snakeString = string.replace(/ /g, '_');
+  return snakeString;
+}
 
 const makeCase = function(string, style) {
   let makeCaseString = string
   switch (style) {
     case 'camel':
       makeCaseString = camelCase(makeCaseString);
-    }
+      break;
+    case 'pascal':
+      makeCaseString = pascalCase(makeCaseString);
+    case 'snake':
+      makeCaseString = snakeStyle(makeCaseString);
+    } 
     return makeCaseString
 }
     
@@ -24,8 +48,8 @@ const makeCase = function(string, style) {
     // return input;
     
     console.log(makeCase("this is a string", "camel"));
-    // console.log(makeCase("this is a string", "pascal"));
-    // console.log(makeCase("this is a string", "snake"));
+    console.log(makeCase("this is a string", "pascal"));
+    console.log(makeCase("this is a string", "snake"));
     // console.log(makeCase("this is a string", "kebab"));
     // console.log(makeCase("this is a string", "title"));
     // console.log(makeCase("this is a string", "vowel"));
