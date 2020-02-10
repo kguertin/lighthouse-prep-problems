@@ -24,11 +24,37 @@ let pascalCase = string => {
   return pascalString;
 }
 
-
 let snakeStyle = string => {
   let snakeString = string.replace(/ /g, '_');
   return snakeString;
 }
+
+let kebabStyle = string => {
+  let kebabString = string.replace(/ /g, '-');
+  return kebabString;
+}
+
+let titleStyle = string => {
+  let titleString = [];
+  string.split('').forEach((c, index) => {
+    if (index == 0){
+      titleString.push(string[0].toUpperCase());
+    }
+
+    if (string[index - 1] === ' '){
+      titleString.push(c.toUpperCase())
+    } else if (index > 0){
+      titleString.push(c);
+    }
+    // if ( c === ' '){
+    // titleString.replace(c, `${c}`.toUpperCase());
+    // }
+    //  string = titleString;
+  })
+  return titleString.join('');
+}
+
+// Make Case Function
 
 const makeCase = function(string, style) {
   let makeCaseString = string
@@ -38,10 +64,18 @@ const makeCase = function(string, style) {
       break;
     case 'pascal':
       makeCaseString = pascalCase(makeCaseString);
+      break;
     case 'snake':
       makeCaseString = snakeStyle(makeCaseString);
+      break;
+    case 'kebab':
+      makeCaseString = kebabStyle(makeCaseString);
+      break;
+    case 'title':
+      makeCaseString =  titleStyle(makeCaseString);
+      break;
     } 
-    return makeCaseString
+    return makeCaseString;
 }
     
     // newString = input.replace(r"(.*?)/\s/([a-zA-Z])", /asb/)
@@ -50,8 +84,8 @@ const makeCase = function(string, style) {
     console.log(makeCase("this is a string", "camel"));
     console.log(makeCase("this is a string", "pascal"));
     console.log(makeCase("this is a string", "snake"));
-    // console.log(makeCase("this is a string", "kebab"));
-    // console.log(makeCase("this is a string", "title"));
+    console.log(makeCase("this is a string", "kebab"));
+    console.log(makeCase("this is a string", "title"));
     // console.log(makeCase("this is a string", "vowel"));
     // console.log(makeCase("this is a string", "consonant"));
     // console.log(makeCase("this is a string", ["upper", "snake"]));
